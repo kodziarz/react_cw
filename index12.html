@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        .klasa {
+            color: red
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main"></div>
+    <script type="text/babel">
+
+        let tab = [
+            {
+                id: 1,
+                task: {
+                    activity: "kupić",
+                    object: "masło"
+                },
+                quantity: 2,
+                colors: [
+                    "blue",
+                    "red",
+                    "grey"
+                ]
+            },
+            {
+                id: 2,
+                task: {
+                    activity: "wylać",
+                    object: "mleko"
+                },
+                quantity: 6,
+                colors: [
+                    "grey",
+                    "red",
+                    "white"
+                ]
+            },
+            {
+                id: 3,
+                task: {
+                    activity: "upiec",
+                    object: "chleb"
+                },
+                quantity: 3,
+                colors: [
+                    "blue",
+                    "red",
+                    "green"
+                ]
+            }
+        ]
+
+
+
+        class TaskList extends React.Component {
+            render() {
+                // let tab = this.props.data
+                // let listItems = tab.map((e, i) => {
+                //     return <Task activity={e.task.activity} object={e.task.object} key={i} />
+                // })
+                return (
+                    <div>
+                        {this.props.data.map((e, i) => {
+                            return <Task data={e} key={i} />
+                        })}
+                    </ div>
+                );
+            }
+        }
+        class Task extends React.Component {
+            render() {
+                console.log(this.props)
+
+                return (
+                    <ul style={{ width: "100px", display: "inline-block" }}>
+                        <li style={{ backgroundColor: this.props.data.colors[0] }}>
+                            id: {this.props.data.id}
+                        </li>
+                        <li style={{ backgroundColor: this.props.data.colors[1] }}>
+                            zadanie:
+                            <div>{this.props.data.task.activity} -$gt; {this.props.data.task.object}</div>
+                        </li>
+                        <li style={{ backgroundColor: this.props.data.colors[2] }}>
+                            ile: {this.props.data.quantity}
+                        </li>
+                    </ul>
+                );
+            }
+        }
+
+        ReactDOM.render(
+            <TaskList data={tab} />,
+            document.getElementById('main')
+        );
+
+
+        // ReactDOM.render(
+        //     <><Start /><Start /><Start /></>,
+        //     document.getElementById('main')
+        // );
+    </script>
+</body>
+
+</html>
